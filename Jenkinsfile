@@ -56,7 +56,7 @@ pipeline {
         }
         stage('SmokeTest') {
             when {
-                branch 'master'   
+                branch 'master'
             }
             steps {
                 script {
@@ -70,7 +70,7 @@ pipeline {
                     }
                 }
             }
-        }    
+        }
         stage('DeployToProduction') {
             when {
                 branch 'master'
@@ -87,11 +87,11 @@ pipeline {
     }
     post {
         cleanup {
-            kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube-canary.yml',
-                    enableConfigSubstitution: true
-            )               
+            kubernetesDeploy (
+                kubeconfigId: 'kubeconfig',
+                configs: 'train-schedule-kube-canary.yml',
+                enableConfigSubstitution: true
+            )
         }
     }
 }
