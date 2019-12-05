@@ -63,7 +63,7 @@ pipeline {
                     echo 'Sleep'
                     sleep (time: 5)
                     echo 'http request'
-                    response = $(curl "http://$KUBE_MASTER_IP:8081/")
+                    response = $(curl http://$KUBE_MASTER_IP:8081/)
                     echo 'check response status'
                     if ( response == "curl: (7) Failed to connect to 52.14.38.93 port 8081: Connection refused" ) {
                         error("Smoke test against canary deployment failed.")
