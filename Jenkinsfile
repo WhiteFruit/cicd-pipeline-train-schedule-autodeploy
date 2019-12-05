@@ -54,20 +54,6 @@ pipeline {
                 )
             }
         }
-        stage('SmokeTest') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    sleep (time: 5)
-                    def response = httpRequest (
-                        url: "http://$KUBE_NODE_IP:8081/",
-                        timeout: 30
-                    )
-                }
-            }
-        }
         stage('DeployToProduction') {
             when {
                 branch 'master'
