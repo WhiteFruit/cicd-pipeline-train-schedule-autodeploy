@@ -60,14 +60,23 @@ pipeline {
             }
             steps {
                 script {
+                    echo 'Sleep'
                     sleep (time: 15)
+                    echo 'http request'
                     def response = httpRequest (
                         url: "http://$KUBE_MASTER_IP:8081/",
                         timeout: 30
                     )
+                    echo 'check response status'
                     if (response.status != 200) {
                         error("Smoke test against canary deployment failed.")
+                        echo response.status
+                        echo "response.status"
+                        echo "$response.status"
+                        echo 'response.status'
+                        echo '$response.status'
                     }
+                    echo 'Response was good or bad.'
                 }
             }
         }
