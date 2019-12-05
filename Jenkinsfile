@@ -64,7 +64,7 @@ pipeline {
                     sleep (time: 5)
                     echo 'http request'
                     def response = httpRequest (
-                        httpMode: 'POST',
+                        httpMode: 'GET',
                         url: "http://$KUBE_MASTER_IP:8081/",
                         timeout: 15
                     )
