@@ -63,10 +63,8 @@ pipeline {
                     echo 'Sleep'
                     sleep (time: 5)
                     echo 'http request'
-                    def response = httpRequest (consoleLogResponseBody: true,
-                        httpMode: 'POST',
-                        url: "http://$KUBE_MASTER_IP:8081/",
-                        timeout: 30
+                    def response = httpRequest (
+                        url: "http://$KUBE_MASTER_IP:8081/"
                     )
                     echo 'check response status'
                     if (response.status != 200) {
