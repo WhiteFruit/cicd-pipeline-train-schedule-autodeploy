@@ -60,20 +60,14 @@ pipeline {
             }
             steps {
                 script {
-                    echo 'Sleep'
                     sleep (time: 5)
-                    echo 'http request'
-                    response = $(curl http://$KUBE_MASTER_IP:8081/)
-                    echo 'check response status'
-                    if ( response == "curl: (7) Failed to connect to 52.14.38.93 port 8081: Connection refused" ) {
+                    def response = httpRequest (
+                        url: "http://$KUBE_MASTER_IP:8081/",
+                        timeout: 30
+                    )
+                    if (response.status != 200) {
                         error("Smoke test against canary deployment failed.")
-                        echo response.status
-                        echo "response.status"
-                        echo "$response.status"
-                        echo 'response.status'
-                        echo '$response.status'
                     }
-                    echo 'Response was good or bad.'
                 }
             }
         }
