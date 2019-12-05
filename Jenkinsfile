@@ -63,9 +63,9 @@ pipeline {
                     echo 'Sleep'
                     sleep (time: 5)
                     echo 'http request'
-                    def response = $(curl -I http://${KUBE_MASTER_IP}:8081/ | grep 200)
+                    def response = curl http://${KUBE_MASTER_IP}:8081/
                     echo 'check response status'
-                    if ( -z ${response} ) {
+                    if ( response == "curl: (7) Failed to connect to 52.14.38.93 port 8081: Connection refused" ) {
                         error("Smoke test against canary deployment failed.")
                         echo response.status
                         echo "response.status"
