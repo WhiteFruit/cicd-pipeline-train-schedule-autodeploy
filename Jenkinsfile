@@ -63,10 +63,10 @@ pipeline {
                     echo 'Sleep'
                     sleep (time: 5)
                     echo 'http request'
-                    def response = httpRequest (
-                        httpMode: 'GET',
+                    httpRequest (
+                        httpMode: 'POST',
                         url: "http://$KUBE_MASTER_IP:8081/",
-                        timeout: 15
+                        timeout: 5
                     )
                     println("Status: "+response.status)
                     echo 'check response status'
