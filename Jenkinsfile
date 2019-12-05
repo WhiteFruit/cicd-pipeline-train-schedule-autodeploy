@@ -64,7 +64,7 @@ pipeline {
                     sleep (time: 5)
                     echo 'http request'
                     httpRequest (
-                        httpMode: 'POST',
+                        httpMode: 'HEAD',
                         url: "http://$KUBE_MASTER_IP:8081/",
                         timeout: 5
                     )
