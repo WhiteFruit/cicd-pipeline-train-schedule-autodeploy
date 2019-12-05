@@ -61,9 +61,10 @@ pipeline {
             steps {
                 script {
                     echo 'Sleep'
-                    sleep (time: 15)
+                    sleep (time: 5)
                     echo 'http request'
                     def response = httpRequest (
+                        HttpMode: POST
                         url: "http://$KUBE_MASTER_IP:8081/",
                         timeout: 30
                     )
