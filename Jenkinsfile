@@ -63,14 +63,9 @@ pipeline {
                     echo 'Sleep'
                     sleep (time: 5)
                     echo 'http request'
-                    httpRequest (
-                        httpMode: 'HEAD',
-                        url: "http://$KUBE_MASTER_IP:8081/",
-                        timeout: 5
-                    )
-                    println("Status: "+response.status)
+                    def response = $(curl - I "http://$KUBE_MASTER_IP:8081/" | grep 200)
                     echo 'check response status'
-                    if (response.status != 200) {
+                    if ( -z ${response} ) {
                         error("Smoke test against canary deployment failed.")
                         echo response.status
                         echo "response.status"
